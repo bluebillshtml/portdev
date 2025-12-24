@@ -2,15 +2,21 @@
 -- LINK-IN-BIO SAAS DATABASE SCHEMA
 -- ============================================
 
--- Enable UUID extension
+-- Enable required extensions
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+-- Create immutable function for case-insensitive comparison
+CREATE OR REPLACE FUNCTION immutable_lower(text) 
+RETURNS text AS $$
+  SELECT lower($1);
+$$ LANGUAGE sql IMMUTABLE STRICT;
 
 -- ============================================
 -- 1. PROFILES TABLE
 -- ============================================
 CREATE TABLE profiles (
   id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
-  username TEXT UNIQUE NOT NULL,
+  username TEXT NOT NULL,
   display_name TEXT,
   bio TEXT,
   avatar_url TEXT,
@@ -22,11 +28,12 @@ CREATE TABLE profiles (
 
   -- Constraints
   CONSTRAINT username_length CHECK (char_length(username) >= 3 AND char_length(username) <= 30),
-  CONSTRAINT username_format CHECK (username ~ '^[a-z0-9_-]+$')
+  CONSTRAINT username_format CHECK (username::text ~* '^[A-Za-z0-9_-]+$')
 );
 
 -- Indexes
-CREATE UNIQUE INDEX idx_profiles_username ON profiles(LOWER(username));
+-- Using text_pattern_ops for better performance with LIKE queries
+CREATE UNIQUE INDEX idx_profiles_username_lower ON profiles (immutable_lower(username) text_pattern_ops);
 CREATE INDEX idx_profiles_created_at ON profiles(created_at DESC);
 
 -- ============================================
