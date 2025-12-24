@@ -1,0 +1,1094 @@
+<html lang="en" class="scroll-smooth"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.25, maximum-scale=2.0">
+  <title>PortDev | Your Link in Bio Solution</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+--glass-border: rgba(255, 255, 255, 0.6);
+--glass-bg: rgba(255, 255, 255, 0.65);
+--electric-blue: rgba(59, 130, 246, 1);
+}
+body {
+font-family: 'Inter', sans-serif;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+background-color: #F5F5F7;
+overflow-x: hidden;
+}
+/* Force thinner stroke on icons */
+.iconify {
+stroke-width: 1.5px !important;
+}
+/* --- Global Scroll Reveal (Zoom In & Fade) --- */
+.reveal-window {
+opacity: 0;
+transform: scale(0.95) translateY(40px);
+transition: opacity 0.8s ease-out, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+will-change: opacity, transform;
+}
+.reveal-window.is-visible {
+opacity: 1;
+transform: scale(1) translateY(0);
+}
+/* --- Vision OS Glass Styles (Light Mode) --- */
+.vision-window {
+background-color: var(--glass-bg);
+backdrop-filter: blur(40px);
+-webkit-backdrop-filter: blur(40px);
+border-radius: 24px;
+border: 1px solid var(--glass-border);
+box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+position: relative;
+z-index: 10;
+}
+/* --- Hover: Electric Blue Glow & Lift --- */
+.interactive-card {
+transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.interactive-card:hover {
+transform: translateY(-8px);
+border-color: rgba(59, 130, 246, 0.5); /* Electric Blue hint */
+box-shadow:
+0 20px 40px -10px rgba(59, 130, 246, 0.15),
+0 0 0 1px rgba(59, 130, 246, 0.3) inset;
+}
+/* --- Hero Floating Animation (Zero Gravity Bob) --- */
+@keyframes float-gentle {
+0%, 100% { transform: translateY(0px); }
+50% { transform: translateY(-15px); }
+}
+.animate-float-card {
+animation: float-gentle 6s ease-in-out infinite;
+}
+/* --- Pulse Engine Radar --- */
+@keyframes radar-ripple {
+0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+70% { box-shadow: 0 0 0 20px rgba(34, 197, 94, 0); }
+100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+.radar-dot {
+animation: radar-ripple 2s infinite;
+}
+@keyframes radar-spin {
+from { transform: rotate(0deg); }
+to { transform: rotate(360deg); }
+}
+.radar-sweep-gradient {
+background: conic-gradient(from 0deg, transparent 0deg, transparent 200deg, rgba(34, 197, 94, 0.3) 360deg);
+animation: radar-spin 3s linear infinite;
+}
+/* --- Agent Staggered Slide In --- */
+.agent-slide-item {
+opacity: 0;
+transform: translateX(-40px);
+transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.is-visible .agent-slide-item {
+opacity: 1;
+transform: translateX(0);
+}
+/* Stacked cards positioning */
+.scale-section.is-visible .agent-card-1 { opacity: 1; transform: translate(32px, 32px) scale(0.95); transition-delay: 100ms; }
+.scale-section.is-visible .agent-card-2 { opacity: 1; transform: translate(16px, 16px) scale(0.95); transition-delay: 300ms; }
+.scale-section.is-visible .agent-card-3 { opacity: 1; transform: translate(-32px, -16px); transition-delay: 500ms; }
+.agent-card-init {
+opacity: 0;
+transform: translate(-100px, 0) scale(0.95);
+transition: opacity 0.8s ease-out, transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+/* --- Text Shimmer --- */
+@keyframes shimmer {
+0% { background-position: 200% center; }
+100% { background-position: -200% center; }
+}
+.text-shimmer {
+background: linear-gradient(to right, #B45309 20%, #FCD34D 40%, #FCD34D 60%, #B45309 80%);
+background-size: 200% auto;
+color: #000;
+background-clip: text;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+animation: shimmer 6s linear infinite;
+}
+/* --- Matrix Glow for Dark Window Button --- */
+@keyframes matrix-breath {
+0%, 100% { box-shadow: 0 0 15px -2px rgba(34, 197, 94, 0.2); border-color: rgba(34, 197, 94, 0.3); }
+50% { box-shadow: 0 0 35px -5px rgba(34, 197, 94, 0.5); border-color: rgba(34, 197, 94, 0.7); }
+}
+.matrix-glow {
+animation: matrix-breath 3s ease-in-out infinite;
+}
+</style>
+<style>
+/* --- Live Mesh Gradient & Blob Animation --- */
+@keyframes blob {
+0% { transform: translate(0px, 0px) scale(1); }
+33% { transform: translate(30px, -50px) scale(1.1); }
+66% { transform: translate(-20px, 20px) scale(0.9); }
+100% { transform: translate(0px, 0px) scale(1); }
+}
+.animate-blob {
+animation: blob 10s infinite ease-in-out;
+}
+.animation-delay-2000 {
+animation-delay: 2s;
+}
+.animation-delay-4000 {
+animation-delay: 4s;
+}
+</style>
+<style>
+/* 3D Transform utilities */
+</style>
+<script>
+// Configure Tailwind to include our custom 3D transform utilities
+tailwind.config = {
+theme: {
+extend: {
+// Add any custom theme extensions here if needed
+}
+},
+plugins: [
+function({ addUtilities }) {
+const rotateXUtilities = {};
+const rotateYUtilities = {};
+const rotateZUtilities = {};
+const rotateValues = [0, 5, 10, 15, 20, 30, 45, 75];
+// Generate rotate-x utilities
+rotateValues.forEach((value) => {
+rotateXUtilities[`.rotate-x-${value}`] = {
+'--tw-rotate-x': `${value}deg`,
+transform: `
+translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+rotateX(var(--tw-rotate-x, 0))
+rotateY(var(--tw-rotate-y, 0))
+rotateZ(var(--tw-rotate-z, 0))
+skewX(var(--tw-skew-x, 0))
+skewY(var(--tw-skew-y, 0))
+scaleX(var(--tw-scale-x, 1))
+scaleY(var(--tw-scale-y, 1))
+`.replace(/\\s+/g, ' ').trim(),
+};
+if (value !== 0) {
+rotateXUtilities[`.-rotate-x-${value}`] = {
+'--tw-rotate-x': `-${value}deg`,
+transform: `
+translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+rotateX(var(--tw-rotate-x, 0))
+rotateY(var(--tw-rotate-y, 0))
+rotateZ(var(--tw-rotate-z, 0))
+skewX(var(--tw-skew-x, 0))
+skewY(var(--tw-skew-y, 0))
+scaleX(var(--tw-scale-x, 1))
+scaleY(var(--tw-scale-y, 1))
+`.replace(/\\s+/g, ' ').trim(),
+};
+}
+});
+// Generate rotate-y utilities
+rotateValues.forEach((value) => {
+rotateYUtilities[`.rotate-y-${value}`] = {
+'--tw-rotate-y': `${value}deg`,
+transform: `
+translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+rotateX(var(--tw-rotate-x, 0))
+rotateY(var(--tw-rotate-y, 0))
+rotateZ(var(--tw-rotate-z, 0))
+skewX(var(--tw-skew-x, 0))
+skewY(var(--tw-skew-y, 0))
+scaleX(var(--tw-scale-x, 1))
+scaleY(var(--tw-scale-y, 1))
+`.replace(/\\s+/g, ' ').trim(),
+};
+if (value !== 0) {
+rotateYUtilities[`.-rotate-y-${value}`] = {
+'--tw-rotate-y': `-${value}deg`,
+transform: `
+translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+rotateX(var(--tw-rotate-x, 0))
+rotateY(var(--tw-rotate-y, 0))
+rotateZ(var(--tw-rotate-z, 0))
+skewX(var(--tw-skew-x, 0))
+skewY(var(--tw-skew-y, 0))
+scaleX(var(--tw-scale-x, 1))
+scaleY(var(--tw-scale-y, 1))
+`.replace(/\\s+/g, ' ').trim(),
+};
+}
+});
+// Generate rotate-z utilities
+rotateValues.forEach((value) => {
+rotateZUtilities[`.rotate-z-${value}`] = {
+'--tw-rotate-z': `${value}deg`,
+transform: `
+translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+rotateX(var(--tw-rotate-x, 0))
+rotateY(var(--tw-rotate-y, 0))
+rotateZ(var(--tw-rotate-z, 0))
+skewX(var(--tw-skew-x, 0))
+skewY(var(--tw-skew-y, 0))
+scaleX(var(--tw-scale-x, 1))
+scaleY(var(--tw-scale-y, 1))
+`.replace(/\\s+/g, ' ').trim(),
+};
+if (value !== 0) {
+rotateZUtilities[`.-rotate-z-${value}`] = {
+'--tw-rotate-z': `-${value}deg`,
+transform: `
+translate3d(var(--tw-translate-x, 0), var(--tw-translate-y, 0), var(--tw-translate-z, 0))
+rotateX(var(--tw-rotate-x, 0))
+rotateY(var(--tw-rotate-y, 0))
+rotateZ(var(--tw-rotate-z, 0))
+skewX(var(--tw-skew-x, 0))
+skewY(var(--tw-skew-y, 0))
+scaleX(var(--tw-scale-x, 1))
+scaleY(var(--tw-scale-y, 1))
+`.replace(/\\s+/g, ' ').trim(),
+};
+}
+});
+// Perspective utilities
+const perspectiveUtilities = {
+".perspective-none": { perspective: "none" },
+".perspective-dramatic": { perspective: "100px" },
+".perspective-near": { perspective: "300px" },
+".perspective-normal": { perspective: "500px" },
+".perspective-midrange": { perspective: "800px" },
+".perspective-distant": { perspective: "1200px" },
+};
+// Transform style utilities
+const transformStyleUtilities = {
+".transform-style-preserve-3d": { "transform-style": "preserve-3d" },
+".transform-style-flat": { "transform-style": "flat" },
+};
+addUtilities({
+...rotateXUtilities,
+...rotateYUtilities,
+...rotateZUtilities,
+...perspectiveUtilities,
+...transformStyleUtilities,
+});
+}
+]
+};
+</script></head>
+  <body class="antialiased text-[#1d1d1f] relative min-h-screen selection:bg-blue-500/20 selection:text-blue-900 text-[1.1rem] leading-relaxed">
+    <!-- Global Mesh Gradient Background -->
+    <div class="fixed inset-0 -z-50 pointer-events-none select-none overflow-hidden bg-[#F5F5F7]">
+      <!-- Top Right: Pale Blue Hint -->
+      <div class="absolute top-[-20%] right-[-10%] w-[80vw] h-[80vw] rounded-full bg-[#E0F7FA] opacity-80 mix-blend-multiply blur-[100px] animate-blob"></div>
+      <!-- Top Left: Soft White -->
+      <div class="absolute top-[-10%] left-[-20%] w-[80vw] h-[80vw] rounded-full bg-white opacity-100 mix-blend-multiply blur-[100px] animate-blob animation-delay-2000"></div>
+      <!-- Bottom: Neutral Moving Base -->
+      <div class="absolute -bottom-[20%] left-[20%] w-[80vw] h-[80vw] rounded-full bg-[#F5F5F7] opacity-80 mix-blend-multiply blur-[100px] animate-blob animation-delay-4000"></div>
+
+      <!-- Noise Texture -->
+      <div class="absolute inset-0 z-10 opacity-[0.03] mix-blend-overlay" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22 opacity=%221%22/%3E%3C/svg%3E');"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-3xl px-6">
+      <div class="h-[56px] flex items-center justify-between pl-4 pr-1.5 rounded-full bg-white/70 backdrop-blur-[60px] border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] ring-1 ring-white/60 transition-all hover:bg-white/80">
+        <a href="#" class="flex items-center gap-3 shrink-0 group">
+          <span class="w-7 h-7 bg-[#1d1d1f] rounded-full flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-300">
+            <span class="text-white text-[10px] font-bold">S</span>
+          </span>
+          <span class="font-medium tracking-tight text-sm text-[#1d1d1f]">
+            PortDev
+          </span>
+        </a>
+        <div class="hidden md:flex items-center gap-8 text-[13px] font-medium text-[#86868b] tracking-normal">
+          <a href="#capabilities" class="hover:text-[#1d1d1f] transition-colors duration-200">
+            Capabilities
+          </a>
+          <a href="#logic" class="hover:text-[#1d1d1f] transition-colors duration-200">
+            Logic Core
+          </a>
+          <a href="#results" class="hover:text-[#1d1d1f] transition-colors duration-200">
+            Results
+          </a>
+        </div>
+        <div class="shrink-0">
+          <a href="#access" class="flex items-center gap-1.5 bg-[#1d1d1f] text-white px-5 h-10 rounded-full text-xs font-semibold tracking-wide hover:bg-black transition-all hover:scale-[1.02] shadow-md hover:shadow-lg">
+            <span>Access System</span>
+            <span class="opacity-70 font-normal ml-0.5">+</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 1. HERO WINDOW -->
+    <header class="min-h-screen flex w-full pt-28 px-4 pb-16 relative items-center justify-center">
+      <div class="vision-window w-full max-w-6xl mx-auto p-8 md:p-12 overflow-visible reveal-window is-visible">
+        <!-- Window Controls -->
+        <div class="absolute top-5 left-5 flex gap-2 z-20 opacity-80 hover:opacity-100 transition-opacity">
+          <div class="w-3 h-3 rounded-full bg-[#FF5F57] border border-black/5 shadow-sm"></div>
+          <div class="w-3 h-3 rounded-full bg-[#FEBC2E] border border-black/5 shadow-sm"></div>
+          <div class="w-3 h-3 rounded-full bg-[#28C840] border border-black/5 shadow-sm"></div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mt-6 relative z-10 text-left min-h-[520px]">
+          <!-- Left Side: Text -->
+          <div class="flex flex-col items-start relative z-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/50 border border-white/60 shadow-sm mb-8 backdrop-blur-sm">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+              </span>
+              <span class="text-[11px] font-semibold text-[#86868b] tracking-wide uppercase">
+  Now Live
+              </span>
+            </div>
+
+            <h1 class="text-6xl lg:text-8xl font-bold text-[#1d1d1f] tracking-tight mb-10 leading-[1.1] max-w-4xl">
+              Your Link in Bio,<br>Elevated
+            </h1>
+            <p class="text-xl md:text-2xl text-[#424245] leading-relaxed max-w-2xl mb-10">
+              Connect your audience to all your content with one simple link. Perfect for creators, entrepreneurs, and professionals.
+            </p>
+
+            <button class="group px-10 py-5 rounded-full bg-[#007AFF] text-white font-medium text-lg transition-all hover:bg-[#0071eb] hover:scale-[1.02] shadow-[0_0_30px_rgba(0,122,255,0.4)] hover:shadow-[0_0_50px_rgba(0,122,255,0.5)] flex items-center gap-2">
+              <span>Get Started Free</span>
+              <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="18"></span>
+            </button>
+          </div>
+
+          <!-- Right Side: Floating Interface -->
+          <div class="relative w-full h-full min-h-[400px] perspective-[1000px] flex items-center justify-center lg:justify-end">
+            <!-- Pulsing Blue Gradient Orb -->
+            <div class="absolute top-1/2 left-1/2 lg:left-[60%] -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-blue-400/20 rounded-full blur-[90px] animate-pulse pointer-events-none z-0"></div>
+
+            <!-- The Frosted Glass Card (Floating) -->
+            <div class="relative z-10 w-full max-w-[420px] bg-white/40 backdrop-blur-2xl border border-white/60 rounded-[30px] p-6 shadow-[0_30px_60px_-12px_rgba(0,0,0,0.1)] animate-float-card transition-transform duration-700 ease-out hover:rotate-1">
+              <div class="flex items-center justify-between mb-8 border-b border-white/30 pb-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-white to-gray-50 border border-white/60 shadow-sm flex items-center justify-center">
+                    <span class="iconify text-[#1d1d1f]" data-icon="lucide:activity" data-width="20"></span>
+                  </div>
+                  <div>
+                    <h3 class="text-sm font-bold text-[#1d1d1f] tracking-tight">
+                      Live Activity
+                    </h3>
+                    <p class="text-[10px] text-[#86868b] font-semibold uppercase tracking-wider">
+                      Real-time Stream
+                    </p>
+                  </div>
+                </div>
+                <div class="flex gap-1.5">
+                  <div class="w-2 h-2 rounded-full bg-gray-300/50"></div>
+                  <div class="w-2 h-2 rounded-full bg-gray-300/50"></div>
+                </div>
+              </div>
+
+              <div class="space-y-4">
+                <!-- Notification 1 -->
+                <div class="interactive-card flex items-center justify-between p-4 rounded-2xl bg-white/50 border border-white/60 shadow-sm cursor-default">
+                  <div class="flex items-center gap-3">
+                    <div class="p-2 rounded-full bg-green-50 text-green-600">
+                      <span class="iconify" data-icon="lucide:user-check" data-width="18"></span>
+                    </div>
+                    <span class="text-sm font-semibold text-[#1d1d1f] tracking-tight">
+                      Lead #8821
+                    </span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                    <span class="text-[11px] font-bold text-green-600 tracking-tight">
+                      Qualified
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Notification 2 -->
+                <div class="interactive-card flex items-center justify-between p-4 rounded-2xl bg-white/50 border border-white/60 shadow-sm cursor-default">
+                  <div class="flex items-center gap-3">
+                    <div class="p-2 rounded-full bg-blue-50 text-blue-600">
+                      <span class="iconify" data-icon="lucide:calendar-check-2" data-width="18"></span>
+                    </div>
+                    <span class="text-sm font-semibold text-[#1d1d1f] tracking-tight">
+                      Booking Appt
+                    </span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                    <span class="text-[11px] font-bold text-blue-600 tracking-tight">
+                      Confirmed
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Notification 3 -->
+                <div class="interactive-card flex items-center justify-between p-4 rounded-2xl bg-white/50 border border-white/60 shadow-sm cursor-default">
+                  <div class="flex items-center gap-3">
+                    <div class="p-2 rounded-full bg-amber-50 text-amber-600">
+                      <span class="iconify" data-icon="lucide:rotate-ccw" data-width="18"></span>
+                    </div>
+                    <span class="text-sm font-semibold text-[#1d1d1f] tracking-tight">
+                      Reviving Lead
+                    </span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                    <span class="text-[11px] font-bold text-amber-600 tracking-tight">
+                      Success
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. BOTTLENECK WINDOW -->
+    <section class="py-12 px-4">
+      <div class="vision-window md:p-16 overflow-hidden reveal-window max-w-6xl mx-auto pt-8 pr-8 pb-8 pl-8 relative">
+        <div class="absolute top-5 left-5 flex gap-2 z-20">
+          <div class="w-3 h-3 rounded-full bg-[#FF5F57] border border-black/5"></div>
+          <div class="w-3 h-3 rounded-full bg-[#FEBC2E] border border-black/5"></div>
+          <div class="w-3 h-3 rounded-full bg-[#28C840] border border-black/5"></div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-16 md:gap-24 items-center mt-8">
+          <div class="order-2 md:order-1">
+            <h2 class="md:text-5xl text-3xl font-bold text-[#1d1d1f] tracking-tighter mb-6">
+              The Ceiling is Real.
+            </h2>
+            <p class="md:text-xl leading-relaxed text-lg font-medium text-[#86868b] tracking-tight max-w-md">
+              Volume breaks people. It fuels Zoey. The more leads you pour in,
+              the smarter the system gets.
+            </p>
+          </div>
+          <div class="order-1 md:order-2 flex flex-col items-center justify-center relative py-12">
+            <!-- Staggered Hover Cards -->
+            <div class="interactive-card relative z-30 w-full max-w-sm bg-white/60 backdrop-blur-2xl border border-white/50 rounded-2xl p-5 shadow-[0_20px_40px_-12px_rgba(239,68,68,0.2)] flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-red-50/80 flex items-center justify-center shrink-0 text-red-500 border border-red-100/50">
+                <span class="iconify" data-icon="lucide:phone-missed" data-width="24"></span>
+              </div>
+              <div>
+                <h3 class="text-base font-bold text-[#1d1d1f] tracking-tight">
+                  Missed Call
+                </h3>
+                <p class="text-xs text-red-500 font-semibold mt-0.5">
+                  12 mins ago
+                </p>
+              </div>
+            </div>
+            <div class="interactive-card relative z-20 w-full max-w-sm bg-white/60 backdrop-blur-2xl border border-white/50 rounded-2xl p-5 shadow-[0_20px_40px_-12px_rgba(239,68,68,0.15)] flex items-center gap-4 -mt-8 scale-[0.95]">
+              <div class="w-12 h-12 rounded-full bg-amber-50/80 flex items-center justify-center shrink-0 text-amber-500 border border-amber-100/50">
+                <span class="iconify" data-icon="lucide:alert-triangle" data-width="24"></span>
+              </div>
+              <div>
+                <h3 class="text-base font-bold text-[#1d1d1f] tracking-tight">
+                  Calendar Conflict
+                </h3>
+                <p class="text-xs text-[#86868b] font-semibold mt-0.5">
+                  Action Required
+                </p>
+              </div>
+            </div>
+            <div class="interactive-card relative z-10 w-full max-w-sm bg-white/60 backdrop-blur-2xl border border-white/50 rounded-2xl p-5 shadow-[0_20px_40px_-12px_rgba(239,68,68,0.1)] flex items-center gap-4 -mt-8 scale-[0.90]">
+              <div class="w-12 h-12 rounded-full bg-blue-50/80 flex items-center justify-center shrink-0 text-blue-500 border border-blue-100/50">
+                <span class="iconify" data-icon="lucide:mail" data-width="24"></span>
+              </div>
+              <div>
+                <h3 class="text-base font-bold text-[#1d1d1f] tracking-tight">
+                  Quote Request
+                </h3>
+                <p class="text-xs text-blue-500 font-bold mt-0.5">Unread</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SYSTEM CAPABILITIES (BENTO GRID) -->
+    <section id="capabilities" class="py-12 px-4">
+      <div class="vision-window max-w-6xl mx-auto p-8 md:p-12 relative overflow-hidden reveal-window">
+        <div class="absolute top-5 left-5 flex gap-2 z-20">
+          <div class="w-3 h-3 rounded-full bg-[#FF5F57] border border-black/5"></div>
+          <div class="w-3 h-3 rounded-full bg-[#FEBC2E] border border-black/5"></div>
+          <div class="w-3 h-3 rounded-full bg-[#28C840] border border-black/5"></div>
+        </div>
+
+        <div class="text-center mb-16 mt-8">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50/50 border border-blue-100/50 backdrop-blur-md mb-6 shadow-sm">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+            </span>
+            <span class="text-[10px] font-semibold text-blue-600 tracking-wide uppercase">
+              System Architecture
+            </span>
+          </div>
+          <h2 class="text-4xl md:text-5xl font-bold tracking-tighter text-[#1d1d1f] mb-4">
+            Zero Latency Operations.
+          </h2>
+          <p class="text-lg text-[#86868b] font-medium tracking-tight max-w-2xl mx-auto">
+            A suite of autonomous engines working in parallel to ensure speed,
+            scale, and recovery.
+          </p>
+        </div>
+
+        <!-- Bento Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(240px,auto)]">
+          <!-- Card 1: Pulse Engine (Interactive) -->
+          <div class="group interactive-card rounded-[32px] p-8 md:col-span-1 md:row-span-2 flex flex-col justify-between relative overflow-hidden bg-white/40 backdrop-blur-md">
+            <div class="relative z-10">
+              <div class="w-10 h-10 rounded-xl bg-white/80 backdrop-blur border border-white/50 flex items-center justify-center mb-4 shadow-sm">
+                <span class="iconify text-green-600" data-icon="lucide:activity" data-width="20"></span>
+              </div>
+              <h3 class="text-xl font-semibold text-[#1d1d1f] tracking-tight mb-2">
+                Pulse Engine
+              </h3>
+              <p class="text-[15px] text-[#86868b] font-medium leading-relaxed">
+                Continuous background monitoring detecting lead signals in
+                real-time.
+              </p>
+            </div>
+
+            <!-- Enhanced Radar Pulse Animation -->
+            <div class="absolute inset-0 top-[20%] flex items-center justify-center opacity-80 pointer-events-none">
+              <div class="relative w-64 h-64">
+                <div class="absolute inset-0 rounded-full border border-green-500/10"></div>
+                <div class="absolute inset-[15%] rounded-full border border-green-500/10"></div>
+                <div class="absolute inset-[30%] rounded-full border border-green-500/20"></div>
+                <div class="absolute inset-0 rounded-full radar-sweep-gradient opacity-30"></div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                  <!-- Radar Dot Ripple -->
+                  <span class="block w-3 h-3 bg-green-500 rounded-full shadow-[0_0_15px_rgba(34,197,94,0.6)] relative z-20"></span>
+                  <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-green-500 rounded-full radar-dot z-10"></span>
+                </div>
+                <!-- Random Blip -->
+                <div class="absolute top-[20%] right-[25%] w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse shadow-sm opacity-60"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Revival Core (Interactive) -->
+          <div class="group interactive-card rounded-[32px] p-8 md:col-span-2 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden bg-white/40 backdrop-blur-md">
+            <div class="relative z-10 max-w-sm">
+              <div class="w-10 h-10 rounded-xl bg-white/80 backdrop-blur border border-white/50 flex items-center justify-center mb-4 shadow-sm">
+                <span class="iconify text-blue-600" data-icon="lucide:refresh-cw" data-width="20"></span>
+              </div>
+              <h3 class="text-xl font-semibold text-[#1d1d1f] tracking-tight mb-2">
+                Revival Core
+              </h3>
+              <p class="text-[15px] text-[#86868b] font-medium leading-relaxed">
+                Automated reactivation sequences turning dormant contacts into
+                revenue.
+              </p>
+            </div>
+
+            <div class="relative w-32 h-32 flex items-center justify-center shrink-0">
+              <div class="absolute inset-0 bg-gradient-to-tr from-blue-50 to-white rounded-full opacity-50 blur-xl"></div>
+              <div class="relative w-20 h-20 bg-white rounded-2xl border border-white/60 shadow-lg flex items-center justify-center overflow-hidden">
+                <!-- Icon Swap defined in head (animate-icon) -->
+                <style>
+                  .anim-icon-1 { animation: icon-swap-1 6s infinite; } .anim-icon-2 { animation: icon-swap-2 6s infinite; } @keyframes icon-swap-1 { 0%,45%{opacity:1;transform:scale(1)} 50%,95%{opacity:0;transform:scale(0.8) rotate(15deg)} 100%{opacity:1;transform:scale(1)} } @keyframes icon-swap-2 { 0%,45%{opacity:0;transform:scale(0.8) rotate(-15deg)} 50%,95%{opacity:1;transform:scale(1)} 100%{opacity:0;transform:scale(0.8) rotate(-15deg)} }
+                </style>
+                <div class="absolute inset-0 flex items-center justify-center anim-icon-1">
+                  <span class="iconify text-gray-400" data-icon="lucide:recycle" data-width="36"></span>
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center anim-icon-2">
+                  <span class="iconify text-green-600" data-icon="lucide:circle-dollar-sign" data-width="36"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Infinite Scale (Interactive) -->
+          <div class="group interactive-card rounded-[32px] p-8 md:col-span-1 flex flex-col justify-between relative overflow-hidden min-h-[240px] bg-white/40 backdrop-blur-md">
+            <div class="relative z-10">
+              <div class="w-10 h-10 rounded-xl bg-white/80 backdrop-blur border border-white/50 flex items-center justify-center mb-4 shadow-sm">
+                <span class="iconify text-purple-600" data-icon="lucide:git-branch" data-width="20"></span>
+              </div>
+              <h3 class="text-xl font-semibold text-[#1d1d1f] tracking-tight mb-2">
+                Infinite Scale
+              </h3>
+              <p class="text-[15px] text-[#86868b] font-medium leading-relaxed">
+                Fractal duplication of successful agent behaviors.
+              </p>
+            </div>
+            <div class="absolute bottom-0 right-0 p-6 opacity-20 group-hover:opacity-40 transition-opacity duration-500">
+              <span class="iconify text-purple-900" data-icon="lucide:network" data-width="96"></span>
+            </div>
+          </div>
+
+          <!-- Card 4: Total Recovered (Interactive) -->
+          <div class="group interactive-card rounded-[32px] p-8 md:col-span-1 flex flex-col justify-between relative overflow-hidden min-h-[240px] bg-white/40 backdrop-blur-md">
+            <div class="relative z-10">
+              <div class="w-10 h-10 rounded-xl bg-white/80 backdrop-blur border border-white/50 flex items-center justify-center mb-4 shadow-sm">
+                <span class="iconify text-amber-600" data-icon="lucide:wallet" data-width="20"></span>
+              </div>
+              <h3 class="text-xl font-semibold text-[#1d1d1f] tracking-tight mb-1">
+                Total Recovered
+              </h3>
+              <p class="text-[15px] text-[#86868b] font-medium leading-relaxed">
+                Lost revenue recaptured by Zoey systems.
+              </p>
+            </div>
+            <div class="mt-6 relative z-10 flex items-baseline">
+              <span class="text-4xl lg:text-5xl font-bold tracking-tight text-shimmer">
+                $450k+
+              </span>
+            </div>
+            <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-amber-200/30 rounded-full blur-[50px] pointer-events-none"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. QUALIFICATION WINDOW -->
+    <section class="py-12 px-4" id="logic">
+      <div class="max-w-6xl mx-auto vision-window p-8 md:p-16 relative overflow-hidden reveal-window">
+        <div class="absolute top-5 left-5 flex gap-2 z-20">
+          <div class="w-3 h-3 rounded-full bg-[#FF5F57] border border-black/5"></div>
+          <div class="w-3 h-3 rounded-full bg-[#FEBC2E] border border-black/5"></div>
+          <div class="w-3 h-3 rounded-full bg-[#28C840] border border-black/5"></div>
+        </div>
+        <div class="text-center mb-16 mt-8">
+          <h2 class="text-3xl md:text-5xl font-bold tracking-tighter text-[#1d1d1f]">
+            Speak Only to the Ready.
+          </h2>
+        </div>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+          <div class="interactive-card w-48 h-48 md:w-56 md:h-56 rounded-3xl bg-white/40 backdrop-blur-xl border border-white/50 shadow-sm flex flex-col items-center justify-center p-6">
+            <div class="w-14 h-14 rounded-2xl bg-gray-100/80 flex items-center justify-center mb-4 text-[#86868b]">
+              <span class="iconify" data-icon="lucide:users" data-width="28"></span>
+            </div>
+            <span class="font-semibold text-[#1d1d1f] tracking-tight text-base">
+              Raw Leads
+            </span>
+          </div>
+
+          <div class="text-[#86868b]/30 rotate-90 md:rotate-0">
+            <span class="iconify" data-icon="lucide:arrow-right" data-width="24"></span>
+          </div>
+
+          <div class="interactive-card w-48 h-48 md:w-56 md:h-56 rounded-3xl bg-white/70 backdrop-blur-xl border-2 border-blue-400/20 shadow-[0_0_40px_rgba(59,130,246,0.15)] flex flex-col items-center justify-center p-6 relative z-10">
+            <div class="w-14 h-14 rounded-2xl bg-blue-50 text-[#007AFF] flex items-center justify-center mb-4 relative">
+              <span class="absolute inset-0 bg-blue-400/20 rounded-2xl animate-ping opacity-20"></span>
+              <span class="iconify relative z-10" data-icon="lucide:cpu" data-width="28"></span>
+            </div>
+            <span class="font-semibold text-[#1d1d1f] tracking-tight text-base">
+              Zoey Filter
+            </span>
+          </div>
+
+          <div class="text-[#86868b]/30 rotate-90 md:rotate-0">
+            <span class="iconify" data-icon="lucide:arrow-right" data-width="24"></span>
+          </div>
+
+          <div class="interactive-card w-48 h-48 md:w-56 md:h-56 rounded-3xl bg-white/40 backdrop-blur-xl border border-white/50 shadow-sm flex flex-col items-center justify-center p-6">
+            <div class="w-14 h-14 rounded-2xl bg-gray-100/80 flex items-center justify-center mb-4 text-[#86868b]">
+              <span class="iconify" data-icon="lucide:badge-check" data-width="28"></span>
+            </div>
+            <span class="font-semibold text-[#1d1d1f] tracking-tight text-base">
+              Booked Calendar
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. SCALE WINDOW -->
+    <section class="py-12 px-4">
+      <div class="max-w-6xl mx-auto vision-window p-8 md:p-16 relative overflow-hidden reveal-window scale-section">
+        <div class="absolute top-5 left-5 flex gap-2 z-20">
+          <div class="w-3 h-3 rounded-full bg-[#FF5F57] border border-black/5"></div>
+          <div class="w-3 h-3 rounded-full bg-[#FEBC2E] border border-black/5"></div>
+          <div class="w-3 h-3 rounded-full bg-[#28C840] border border-black/5"></div>
+        </div>
+        <div class="max-w-2xl mx-auto mb-16 text-center mt-8">
+          <h2 class="text-3xl md:text-5xl font-bold tracking-tighter text-[#1d1d1f] mb-6">
+            Scale Without The Chaos.
+          </h2>
+          <p class="text-lg text-[#86868b] font-medium leading-relaxed">
+            True growth is duplication. Equip your downline with the same power
+            that drives you.
+          </p>
+        </div>
+        <div class="relative max-w-4xl mx-auto h-[450px] md:h-[350px] flex items-center justify-center">
+          <!-- Staggered Entry Agents -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10 w-full">
+            <!-- Agent 1 (Back) -->
+            <div class="agent-card-init agent-card-1 bg-white/80 backdrop-blur-md rounded-2xl p-5 border border-white shadow-lg flex items-center justify-between absolute left-0 right-0 md:relative z-0">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-blue-50 text-[#007AFF] flex items-center justify-center">
+                  <span class="iconify" data-icon="lucide:user" data-width="20"></span>
+                </div>
+                <div>
+                  <div class="text-sm font-bold text-[#1d1d1f]">
+                    Agent Unit 8829-A
+                  </div>
+                  <div class="text-[10px] text-[#86868b] font-mono">Active</div>
+                </div>
+              </div>
+              <div class="w-2 h-2 rounded-full bg-green-500"></div>
+            </div>
+
+            <!-- Agent 2 (Middle) -->
+            <div class="agent-card-init agent-card-2 bg-white/80 backdrop-blur-md rounded-2xl p-5 border border-white shadow-lg flex items-center justify-between absolute left-0 right-0 md:relative z-10">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-blue-50 text-[#007AFF] flex items-center justify-center">
+                  <span class="iconify" data-icon="lucide:user" data-width="20"></span>
+                </div>
+                <div>
+                  <div class="text-sm font-bold text-[#1d1d1f]">
+                    Agent Unit 8829-B
+                  </div>
+                  <div class="text-[10px] text-[#86868b] font-mono">Active</div>
+                </div>
+              </div>
+              <div class="w-2 h-2 rounded-full bg-green-500"></div>
+            </div>
+
+            <!-- Agent 3 (Front/Top) -->
+            <div class="agent-card-init agent-card-3 bg-white rounded-2xl p-5 border border-white shadow-[0_10px_30px_rgba(0,0,0,0.1)] flex items-center justify-between absolute left-0 right-0 md:relative z-20 ring-4 ring-blue-500/10">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-[#007AFF] text-white flex items-center justify-center shadow-lg shadow-blue-500/20">
+                  <span class="iconify" data-icon="lucide:user-check" data-width="20"></span>
+                </div>
+                <div>
+                  <div class="text-sm font-bold text-[#1d1d1f]">
+                    Agent Unit 8829-D (Primary)
+                  </div>
+                  <div class="text-[10px] text-[#86868b] font-mono">
+                    Connected
+                  </div>
+                </div>
+              </div>
+              <div class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e]"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. TIME COLLAPSE WINDOW -->
+    <section class="py-12 px-4">
+      <div class="max-w-4xl mx-auto vision-window p-8 md:p-16 relative overflow-hidden reveal-window">
+        <div class="absolute top-5 left-5 flex gap-2 z-20">
+          <div class="w-3 h-3 rounded-full bg-[#FF5F57] border border-black/5"></div>
+          <div class="w-3 h-3 rounded-full bg-[#FEBC2E] border border-black/5"></div>
+          <div class="w-3 h-3 rounded-full bg-[#28C840] border border-black/5"></div>
+        </div>
+        <div class="absolute top-5 right-5 z-20">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-50 border border-green-200/60 text-[10px] font-bold text-green-600 shadow-sm backdrop-blur-sm">
+            <span class="iconify" data-icon="lucide:trending-up" data-width="12"></span>
+            <span>Performance: +800%</span>
+          </div>
+        </div>
+        <div class="text-center mb-16 mt-8">
+          <h2 class="text-3xl md:text-5xl font-bold tracking-tighter text-[#1d1d1f] mb-4">
+            Efficiency Metrics.
+          </h2>
+          <p class="text-lg text-[#86868b] font-medium">
+            Efficiency measured in orders of magnitude.
+          </p>
+        </div>
+        <div class="space-y-10 bg-white/50 p-8 md:p-12 rounded-[32px] border border-white/60 shadow-inner">
+          <div>
+            <div class="flex justify-between items-end mb-3">
+              <span class="text-xs font-bold text-[#86868b] uppercase tracking-wide">
+                Human Admin
+              </span>
+              <span class="font-mono text-red-500 font-bold">40 Hours</span>
+            </div>
+            <div class="w-full h-10 bg-gray-100/50 rounded-full overflow-hidden relative shadow-inner border border-gray-200/50">
+              <div class="absolute top-0 left-0 h-full w-full bg-red-400 rounded-full shadow-[0_0_15px_rgba(248,113,113,0.3)]"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between items-end mb-3">
+              <span class="text-xs font-bold text-[#007AFF] uppercase tracking-wide flex items-center gap-2">
+                StanceX System
+                <span class="iconify" data-icon="lucide:zap" data-width="12"></span>
+              </span>
+              <span class="font-mono text-[#007AFF] font-bold">5 Hours</span>
+            </div>
+            <div class="w-full h-10 bg-gray-100/50 rounded-full overflow-hidden relative shadow-inner border border-gray-200/50">
+              <div class="absolute top-0 left-0 h-full w-[15%] bg-[#007AFF] rounded-full shadow-[0_0_15px_rgba(0,122,255,0.4)]"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. ACCESS WINDOW (REDESIGNED: Dark System Control Panel) -->
+    <section class="py-12 px-4 mb-20 relative z-20" id="access">
+      <div class="max-w-5xl mx-auto bg-black/80 backdrop-blur-2xl border border-white/10 rounded-[30px] p-8 md:p-16 relative overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] reveal-window">
+        <!-- Mac Traffic Light Dots (Control Panel) -->
+        <div class="absolute top-6 left-6 flex gap-2 z-20 opacity-80">
+          <div class="w-3 h-3 rounded-full bg-[#FF5F57] shadow-sm"></div>
+          <div class="w-3 h-3 rounded-full bg-[#FEBC2E] shadow-sm"></div>
+          <div class="w-3 h-3 rounded-full bg-[#28C840] shadow-sm"></div>
+        </div>
+
+        <!-- System Header -->
+        <div class="text-center mb-16 mt-6 relative z-10">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-900/30 border border-green-500/30 text-[10px] font-bold text-green-400 uppercase tracking-widest mb-6">
+            <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+            System Status: Online
+          </div>
+          <h2 class="text-3xl md:text-5xl font-semibold tracking-tighter text-white">
+            Protocol: StanceXSystems
+          </h2>
+        </div>
+
+        <!-- Pricing Cards -->
+        <div class="grid md:grid-cols-2 gap-8 mb-12 relative z-10">
+          <!-- Card 1: Producer Core (Dark Mode, Gold Glow) -->
+          <div class="group relative p-10 rounded-[24px] bg-[#0A0A0A] border border-amber-500/40 shadow-[0_0_40px_-10px_rgba(245,158,11,0.15)] hover:shadow-[0_0_50px_-5px_rgba(245,158,11,0.3)] transition-all duration-300">
+            <div class="w-14 h-14 rounded-full bg-amber-900/20 flex items-center justify-center mb-6 text-amber-500 border border-amber-500/20 group-hover:scale-110 transition-transform duration-300">
+              <span class="iconify" data-icon="lucide:briefcase" data-width="28"></span>
+            </div>
+            <h3 class="text-2xl font-semibold text-white mb-3 tracking-tight">
+              Producer Core
+            </h3>
+            <p class="text-sm text-gray-400 font-medium leading-relaxed max-w-xs">
+              Essential automation for individual high-performers.
+            </p>
+          </div>
+
+          <!-- Card 2: Builder Command (Dark Mode, Blue Glow) -->
+          <div class="group relative p-10 rounded-[24px] bg-[#0A0A0A] border border-blue-500/40 shadow-[0_0_40px_-10px_rgba(59,130,246,0.15)] hover:shadow-[0_0_50px_-5px_rgba(59,130,246,0.3)] transition-all duration-300 overflow-hidden">
+            <!-- Recommended Badge -->
+            <div class="absolute top-0 right-0 bg-[#007AFF] text-white text-[10px] font-bold px-4 py-1.5 rounded-bl-2xl uppercase tracking-widest z-20">
+              Recommended
+            </div>
+            <div class="w-14 h-14 rounded-full bg-blue-900/20 flex items-center justify-center mb-6 text-[#007AFF] border border-blue-500/20 group-hover:scale-110 transition-transform duration-300 relative z-10">
+              <span class="iconify" data-icon="lucide:layers" data-width="28"></span>
+            </div>
+            <h3 class="text-2xl font-semibold text-white mb-3 tracking-tight relative z-10">
+              Builder Command
+            </h3>
+            <p class="text-sm text-gray-400 font-medium leading-relaxed mb-4 relative z-10">
+              Includes Recruitment Logic, Revival Engines, &amp; Autonomous Ops.
+            </p>
+            <!-- Subtle Blue Wash -->
+            <div class="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+          </div>
+        </div>
+
+        <!-- Matrix Green Button -->
+        <button class="w-full py-5 rounded-xl bg-black text-green-400 font-bold text-lg tracking-wide border border-green-500/50 matrix-glow hover:text-green-300 transition-all flex items-center justify-center gap-3 relative overflow-hidden group">
+          <span class="absolute inset-0 bg-green-500/5 group-hover:bg-green-500/10 transition-colors duration-300"></span>
+          <span class="relative z-10">INITIALIZE SYSTEM</span>
+          <span class="iconify relative z-10" data-icon="lucide:power" data-width="20"></span>
+        </button>
+      </div>
+    </section>
+    <footer class="w-full border-t border-gray-200 bg-white/60 backdrop-blur-xl pt-16 pb-32 px-6 md:px-12 relative z-10">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+          <!-- Col 1: Brand -->
+          <div class="col-span-2 md:col-span-1">
+            <a href="#" class="flex items-center gap-2 mb-4 group">
+              <span class="w-6 h-6 bg-[#1d1d1f] rounded-full flex items-center justify-center shadow-sm">
+                <span class="text-white text-[9px] font-bold">S</span>
+              </span>
+              <span class="font-bold tracking-tight text-sm text-[#1d1d1f]">
+                StanceXSystems
+              </span>
+            </a>
+            <p class="text-xs text-[#86868b] leading-relaxed max-w-[160px]">
+              Redefining the standards of digital infrastructure.
+            </p>
+          </div>
+
+          <!-- Col 2: Platform -->
+          <div>
+            <h4 class="font-bold text-[#1d1d1f] text-sm mb-4">Product</h4>
+            <ul class="space-y-3">
+              <li>
+                <a href="#" class="text-sm text-[#86868b] hover:text-[#007AFF] transition-colors">
+                  Pulse Engine
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-sm text-[#86868b] hover:text-[#007AFF] transition-colors">
+                  Revival Core
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-sm text-[#86868b] hover:text-[#007AFF] transition-colors">
+                  Logic Filter
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-sm text-[#86868b] hover:text-[#007AFF] transition-colors">
+                  Security
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Company -->
+          <div>
+            <h4 class="font-bold text-[#1d1d1f] text-sm mb-4">Company</h4>
+            <ul class="space-y-3">
+              <li>
+                <a href="#" class="text-sm text-[#86868b] hover:text-[#007AFF] transition-colors">
+                  About Zoey
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-sm text-[#86868b] hover:text-[#007AFF] transition-colors">
+                  Methodology
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-sm text-[#86868b] hover:text-[#007AFF] transition-colors">
+                  Careers
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-sm text-[#86868b] hover:text-[#007AFF] transition-colors">
+                  Contact
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Col 4: Legal -->
+          <div>
+            <h4 class="font-bold text-[#1d1d1f] text-sm mb-4">Legal</h4>
+            <ul class="space-y-3">
+              <li>
+                <a href="#" class="text-sm text-[#86868b] hover:text-[#007AFF] transition-colors">
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-sm text-[#86868b] hover:text-[#007AFF] transition-colors">
+                  Terms of Service
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-sm text-[#86868b] hover:text-[#007AFF] transition-colors">
+                  Data Processing (GDPR)
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-sm text-[#86868b] hover:text-[#007AFF] transition-colors">
+                  Accessibility
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Col 5: Social -->
+          <div>
+            <h4 class="font-bold text-[#1d1d1f] text-sm mb-4">Social</h4>
+            <div class="flex items-center gap-4 flex-wrap">
+              <a href="#" class="text-[#86868b] hover:text-[#1d1d1f] transition-colors hover:scale-110">
+                <span class="iconify" data-icon="logos:google-icon" data-width="18"></span>
+              </a>
+              <a href="#" class="text-[#86868b] hover:text-[#1d1d1f] transition-colors hover:scale-110">
+                <span class="iconify" data-icon="logos:facebook" data-width="18"></span>
+              </a>
+              <a href="#" class="text-[#86868b] hover:text-[#1d1d1f] transition-colors hover:scale-110">
+                <span class="iconify" data-icon="skill-icons:instagram" data-width="18"></span>
+              </a>
+              <a href="#" class="text-[#86868b] hover:text-[#1d1d1f] transition-colors hover:scale-110">
+                <span class="iconify text-black" data-icon="simple-icons:threads" data-width="18"></span>
+              </a>
+              <a href="#" class="text-[#86868b] hover:text-[#1d1d1f] transition-colors hover:scale-110">
+                <span class="iconify" data-icon="logos:tiktok-icon" data-width="18"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-8 border-t border-gray-200/60 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p class="text-xs text-[#86868b]">
+            © 2025 PortDev. All rights reserved. | Designed in the
+            Future.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- FOOTER -->
+    <footer class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-full flex justify-center pointer-events-none">
+      <div class="pointer-events-auto flex items-center gap-6 px-4 py-3 rounded-[2.5rem] bg-white/60 backdrop-blur-[50px] border border-white/40 shadow-[0_20px_50px_rgba(0,0,0,0.15)] ring-1 ring-white/30 transition-all duration-300 hover:bg-white/70">
+        <!-- Left Label -->
+        <div class="hidden md:flex items-center gap-4 pl-3">
+          <span class="text-[11px] font-semibold text-[#86868b] tracking-tight font-mono">
+            StanceX OS v1.0
+          </span>
+          <div class="w-px h-4 bg-black/10"></div>
+        </div>
+
+        <!-- Dock Icons -->
+        <div class="flex items-center gap-2.5">
+          <!-- Google -->
+          <a href="#" class="group relative flex items-center justify-center w-11 h-11 rounded-xl bg-white shadow-sm border border-white/20 transition-all duration-300 cubic-bezier(0.25, 1, 0.5, 1) hover:scale-125 hover:-translate-y-2 hover:shadow-xl hover:z-10">
+            <span class="iconify" data-icon="logos:google-icon" data-width="22"></span>
+          </a>
+          <!-- Facebook -->
+          <a href="#" class="group relative flex items-center justify-center w-11 h-11 rounded-xl bg-white shadow-sm border border-white/20 transition-all duration-300 cubic-bezier(0.25, 1, 0.5, 1) hover:scale-125 hover:-translate-y-2 hover:shadow-xl hover:z-10">
+            <span class="iconify" data-icon="logos:facebook" data-width="22"></span>
+          </a>
+          <!-- Instagram -->
+          <a href="#" class="group relative flex items-center justify-center w-11 h-11 rounded-xl bg-white shadow-sm border border-white/20 transition-all duration-300 cubic-bezier(0.25, 1, 0.5, 1) hover:scale-125 hover:-translate-y-2 hover:shadow-xl hover:z-10">
+            <span class="iconify" data-icon="skill-icons:instagram" data-width="22"></span>
+          </a>
+          <!-- Threads -->
+          <a href="#" class="group relative flex items-center justify-center w-11 h-11 rounded-xl bg-white shadow-sm border border-white/20 transition-all duration-300 cubic-bezier(0.25, 1, 0.5, 1) hover:scale-125 hover:-translate-y-2 hover:shadow-xl hover:z-10">
+            <span class="iconify text-black" data-icon="simple-icons:threads" data-width="20"></span>
+          </a>
+          <!-- TikTok -->
+          <a href="#" class="group relative flex items-center justify-center w-11 h-11 rounded-xl bg-white shadow-sm border border-white/20 transition-all duration-300 cubic-bezier(0.25, 1, 0.5, 1) hover:scale-125 hover:-translate-y-2 hover:shadow-xl hover:z-10">
+            <span class="iconify" data-icon="logos:tiktok-icon" data-width="20"></span>
+          </a>
+        </div>
+
+        <!-- Right Status -->
+        <div class="hidden md:flex items-center gap-4 pr-3">
+          <div class="w-px h-4 bg-black/10"></div>
+          <div class="flex items-center gap-2 whitespace-nowrap">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#34c759] opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-[#34c759]"></span>
+            </span>
+            <span class="text-[10px] font-bold text-[#1d1d1f] tracking-wide uppercase">
+              Systems Online
+            </span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll Animation Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+          const observerOptions = {
+              root: null,
+              rootMargin: '0px',
+              threshold: 0.15
+          };
+          const observer = new IntersectionObserver((entries, observer) => {
+              entries.forEach(entry => {
+                  if (entry.isIntersecting) {
+                      entry.target.classList.add('is-visible');
+                      observer.unobserve(entry.target);
+                  }
+              });
+          }, observerOptions);
+
+          document.querySelectorAll('.reveal-window').forEach(section => {
+              observer.observe(section);
+          });
+      });
+    </script>
+  
+</body></html>
