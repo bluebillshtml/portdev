@@ -52,6 +52,20 @@
         <input type="password" id="password" name="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="••••••••" required>
       </div>
       <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-300" id="submit-button">Sign In</button>
+
+      <div class="mt-6 text-center text-gray-700 text-sm font-medium">Or sign in with:</div>
+      <div class="mt-4 space-y-3">
+        <button type="button" id="google-oauth" class="w-full flex items-center justify-center bg-white border border-gray-300 py-2 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 transition duration-300">
+          <span class="iconify mr-2" data-icon="mdi:google"></span> Sign In with Google
+        </button>
+        <button type="button" id="github-oauth" class="w-full flex items-center justify-center bg-white border border-gray-300 py-2 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 transition duration-300">
+          <span class="iconify mr-2" data-icon="mdi:github"></span> Sign In with GitHub
+        </button>
+        <button type="button" id="gitlab-oauth" class="w-full flex items-center justify-center bg-white border border-gray-300 py-2 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 transition duration-300">
+          <span class="iconify mr-2" data-icon="mdi:gitlab"></span> Sign In with GitLab
+        </button>
+      </div>
+
       <p class="text-center text-gray-600 text-sm mt-4">Don't have an account? <a href="signup.html" id="signup-redirect-link" class="text-blue-600 hover:underline">Sign Up</a></p>
     </form>
   </div>
@@ -85,6 +99,30 @@
     document.getElementById('signup-redirect-link').addEventListener('click', (e) => {
       e.preventDefault();
       window.location.href = 'signup.html';
+    });
+
+    document.getElementById('google-oauth').addEventListener('click', async () => {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo: 'dashboard.html' },
+      });
+      if (error) alert(error.message);
+    });
+
+    document.getElementById('github-oauth').addEventListener('click', async () => {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'github',
+        options: { redirectTo: 'dashboard.html' },
+      });
+      if (error) alert(error.message);
+    });
+
+    document.getElementById('gitlab-oauth').addEventListener('click', async () => {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'gitlab',
+        options: { redirectTo: 'dashboard.html' },
+      });
+      if (error) alert(error.message);
     });
   </script>
 </body>
