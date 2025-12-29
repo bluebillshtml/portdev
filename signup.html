@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.25, maximum-scale=2.0">
-  <title>PortDev | Sign In</title>
+  <title>PortDev | Sign Up</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,8 +41,8 @@
 </head>
 <body class="flex items-center justify-center min-h-screen p-6">
   <div class="vision-window p-8 rounded-lg shadow-lg w-full max-w-md">
-    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Sign In</h2>
-    <form id="auth-form">
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6" id="form-title">Sign Up</h2>
+    <form id="signup-form">
       <div class="mb-4">
         <label for="email" class="block text-gray-700 text-sm font-medium mb-2">Email</label>
         <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="you@example.com" required>
@@ -51,23 +51,33 @@
         <label for="password" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
         <input type="password" id="password" name="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="••••••••" required>
       </div>
-      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-300" id="submit-button">Sign In</button>
-      <p class="text-center text-gray-600 text-sm mt-4">Don't have an account? <a href="signup.html" id="signup-redirect-link" class="text-blue-600 hover:underline">Sign Up</a></p>
+      <div class="mb-6" id="confirm-password-field">
+        <label for="confirm-password" class="block text-gray-700 text-sm font-medium mb-2">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm-password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-300" id="submit-button">Sign Up</button>
+      <p class="text-center text-gray-600 text-sm mt-4">Already have an account? <a href="auth.html" id="signin-link" class="text-blue-600 hover:underline">Sign In</a></p>
     </form>
   </div>
 
   <script>
-    const authForm = document.getElementById('auth-form');
+    const signupForm = document.getElementById('signup-form');
     const SUPABASE_URL = 'https://rwznaqwlqqmuolekzjgn.supabase.co'; // Replace with your Supabase Project URL
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ3em5hcXdscXFtdW9sZWt6amduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY1NjY0MjUsImV4cCI6MjA4MjE0MjQyNX0.1NABTAa-aTzsmfC3QqKLBAHImWbbvUOb2JVg0FxxflI'; // Replace with your Supabase Anon Key
     const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    authForm.addEventListener('submit', async (e) => {
+    signupForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
 
-      const { data, error } = await supabase.auth.signInWithPassword({
+      if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return;
+      }
+      
+      const { data, error } = await supabase.auth.signUp({
         email: email,
         password: password,
       });
@@ -75,16 +85,11 @@
       if (error) {
         alert(error.message);
       } else if (data.user) {
-        alert('Sign In successful! Welcome!');
-        window.location.href = 'dashboard.html'; // Redirect to the dashboard
+        alert('Sign Up successful! Check your email for a confirmation link.');
+        window.location.href = 'auth.html'; // Redirect to sign-in after successful sign-up
       } else {
-        alert('Something went wrong during sign in. Please try again.');
+        alert('Something went wrong during sign up. Please try again.');
       }
-    });
-
-    document.getElementById('signup-redirect-link').addEventListener('click', (e) => {
-      e.preventDefault();
-      window.location.href = 'signup.html';
     });
   </script>
 </body>
