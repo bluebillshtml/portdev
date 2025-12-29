@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.25, maximum-scale=2.0">
+  <title>PortDev | Sign In / Sign Up</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --glass-border: rgba(255, 255, 255, 0.6);
+      --glass-bg: rgba(255, 255, 255, 0.65);
+      --electric-blue: rgba(59, 130, 246, 1);
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: #F5F5F7;
+      overflow-x: hidden;
+    }
+    /* Force thinner stroke on icons */
+    .iconify {
+      stroke-width: 1.5px !important;
+    }
+    .vision-window {
+      background-color: var(--glass-bg);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border-radius: 24px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+      position: relative;
+      z-index: 10;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen p-6">
+  <div class="vision-window p-8 rounded-lg shadow-lg w-full max-w-md">
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6" id="form-title">Sign In</h2>
+    <form id="auth-form">
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700 text-sm font-medium mb-2">Email</label>
+        <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="you@example.com" required>
+      </div>
+      <div class="mb-6">
+        <label for="password" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
+        <input type="password" id="password" name="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="••••••••" required>
+      </div>
+      <div class="mb-6 hidden" id="confirm-password-field">
+        <label for="confirm-password" class="block text-gray-700 text-sm font-medium mb-2">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm-password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="••••••••">
+      </div>
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-300" id="submit-button">Sign In</button>
+      <p class="text-center text-gray-600 text-sm mt-4" id="toggle-auth-mode">Don't have an account? <a href="#" id="switch-link" class="text-blue-600 hover:underline">Sign Up</a></p>
+    </form>
+  </div>
+
+  <script>
+    const authForm = document.getElementById('auth-form');
+    const formTitle = document.getElementById('form-title');
+    const submitButton = document.getElementById('submit-button');
+    const toggleAuthMode = document.getElementById('toggle-auth-mode');
+    const switchLink = document.getElementById('switch-link');
+    const confirmPasswordField = document.getElementById('confirm-password-field');
+    const confirmPasswordInput = document.getElementById('confirm-password');
+
+    const SUPABASE_URL = 'https://rwznaqwlqqmuolekzjgn.supabase.co'; // Replace with your Supabase Project URL
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ3em5hcXdscXFtdW9sZWt6amduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY1NjY0MjUsImV4cCI6MjA4MjE0MjQyNX0.1NABTAa-aTzsmfC3QqKLBAHImWbbvUOb2JVg0FxxflI'; // Replace with your Supabase Anon Key
+    const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    let isSignUpMode = false;
+
+    // Re-attach event listener to the new switchLink
+    const attachSwitchLinkListener = () => {
+        document.getElementById('switch-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            isSignUpMode = !isSignUpMode;
+            if (isSignUpMode) {
+                formTitle.textContent = 'Sign Up';
+                submitButton.textContent = 'Sign Up';
+                toggleAuthMode.innerHTML = 'Already have an account? <a href="#" id="switch-link" class="text-blue-600 hover:underline">Sign In</a>';
+                confirmPasswordField.classList.remove('hidden');
+                confirmPasswordInput.setAttribute('required', '');
+            } else {
+                formTitle.textContent = 'Sign In';
+                submitButton.textContent = 'Sign In';
+                toggleAuthMode.innerHTML = 'Don't have an account? <a href="#" id="switch-link" class="text-blue-600 hover:underline">Sign Up</a>';
+                confirmPasswordField.classList.add('hidden');
+                confirmPasswordInput.removeAttribute('required');
+            }
+            attachSwitchLinkListener(); // Re-attach after innerHTML changes
+        });
+    };
+    attachSwitchLinkListener();
+
+    authForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      if (isSignUpMode) {
+        const confirmPassword = document.getElementById('confirm-password').value;
+        if (password !== confirmPassword) {
+          alert('Passwords do not match!');
+          return;
+        }
+        
+        const { data, error } = await supabase.auth.signUp({
+          email: email,
+          password: password,
+        });
+
+        if (error) {
+          alert(error.message);
+        } else if (data.user) {
+          alert('Sign Up successful! Check your email for a confirmation link.');
+          // Optionally redirect to a confirmation page or login page
+        } else {
+          alert('Something went wrong during sign up. Please try again.');
+        }
+
+      } else {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: email,
+          password: password,
+        });
+
+        if (error) {
+          alert(error.message);
+        } else if (data.user) {
+          alert('Sign In successful! Welcome!');
+          // Redirect to the dashboard or link-in-bio creation page
+        } else {
+          alert('Something went wrong during sign in. Please try again.');
+        }
+      }
+    });
+  </script>
+</body>
+

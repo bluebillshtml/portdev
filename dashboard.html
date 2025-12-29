@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.25, maximum-scale=2.0">
+  <title>PortDev | Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --glass-border: rgba(255, 255, 255, 0.6);
+      --glass-bg: rgba(255, 255, 255, 0.65);
+      --electric-blue: rgba(59, 130, 246, 1);
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: #F5F5F7;
+      overflow-x: hidden;
+    }
+    /* Force thinner stroke on icons */
+    .iconify {
+      stroke-width: 1.5px !important;
+    }
+    .vision-window {
+      background-color: var(--glass-bg);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border-radius: 24px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+      position: relative;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center min-h-screen p-6 bg-gray-100">
+  <header class="w-full max-w-2xl flex justify-between items-center py-4">
+    <h1 class="text-3xl font-bold text-gray-800">Your Links</h1>
+    <button id="signout-button" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300">Sign Out</button>
+  </header>
+
+  <main class="w-full max-w-2xl mt-8">
+    <div class="vision-window p-8 rounded-lg shadow-lg mb-8">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Add New Link</h2>
+      <form id="add-link-form">
+        <div class="mb-4">
+          <label for="link-title" class="block text-gray-700 text-sm font-medium mb-2">Title</label>
+          <input type="text" id="link-title" name="link-title" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="My Website" required>
+        </div>
+        <div class="mb-6">
+          <label for="link-url" class="block text-gray-700 text-sm font-medium mb-2">URL</label>
+          <input type="url" id="link-url" name="link-url" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="https://example.com" required>
+        </div>
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">Add Link</button>
+      </form>
+    </div>
+
+    <div class="vision-window p-8 rounded-lg shadow-lg">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Existing Links</h2>
+      <div id="links-list" class="space-y-4">
+        <!-- Links will be dynamically loaded here -->
+        <p class="text-gray-500 text-center" id="no-links-message">No links added yet. Add one above!</p>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = 'https://rwznaqwlqqmuolekzjgn.supabase.co'; // Replace with your Supabase Project URL
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ3em5hcXdscXFtdW9sZWt6amduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY1NjY0MjUsImV4cCI6MjA4MjE0MjQyNX0.1NABTAa-aTzsmfC3QqKLBAHImWbbvUOb2JVg0FxxflI'; // Replace with your Supabase Anon Key
+    const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const addLinkForm = document.getElementById('add-link-form');
+    const linksList = document.getElementById('links-list');
+    const signoutButton = document.getElementById('signout-button');
+    const noLinksMessage = document.getElementById('no-links-message');
+
+    // Function to fetch and display links
+    async function fetchLinks() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        window.location.href = 'auth.html'; // Redirect to login if not authenticated
+        return;
+      }
+
+      const { data: links, error } = await supabase
+        .from('links') // Assuming you have a 'links' table in Supabase
+        .select('id, title, url')
+        .eq('user_id', user.id);
+
+      if (error) {
+        console.error('Error fetching links:', error.message);
+        linksList.innerHTML = '<p class="text-red-500 text-center">Error loading links.</p>';
+        return;
+      }
+
+      linksList.innerHTML = ''; // Clear existing links
+      if (links.length === 0) {
+        noLinksMessage.classList.remove('hidden');
+      } else {
+        noLinksMessage.classList.add('hidden');
+        links.forEach(link => {
+          const linkElement = document.createElement('div');
+          linkElement.className = 'vision-window p-4 flex items-center justify-between';
+          linkElement.innerHTML = `
+            <div>
+              <h3 class="text-lg font-semibold text-gray-800">${link.title}</h3>
+              <a href="${link.url}" target="_blank" class="text-blue-600 hover:underline text-sm">${link.url}</a>
+            </div>
+            <div>
+              <button class="edit-link-button bg-yellow-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-yellow-600 transition duration-300 mr-2" data-id="${link.id}" data-title="${link.title}" data-url="${link.url}">Edit</button>
+              <button class="delete-link-button bg-red-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-red-600 transition duration-300" data-id="${link.id}">Delete</button>
+            </div>
+          `;
+          linksList.appendChild(linkElement);
+        });
+      }
+    }
+
+    // Handle adding new link
+    addLinkForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const title = document.getElementById('link-title').value;
+      const url = document.getElementById('link-url').value;
+
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return; // Should not happen if redirected properly
+
+      const { error } = await supabase
+        .from('links')
+        .insert([{ user_id: user.id, title, url }]);
+
+      if (error) {
+        alert('Error adding link:' + error.message);
+      } else {
+        addLinkForm.reset();
+        fetchLinks(); // Refresh links list
+      }
+    });
+
+    // Handle deleting link
+    linksList.addEventListener('click', async (e) => {
+      if (e.target.classList.contains('delete-link-button')) {
+        const linkId = e.target.dataset.id;
+        if (confirm('Are you sure you want to delete this link?')) {
+          const { error } = await supabase
+            .from('links')
+            .delete()
+            .eq('id', linkId);
+
+          if (error) {
+            alert('Error deleting link:' + error.message);
+          } else {
+            fetchLinks(); // Refresh links list
+          }
+        }
+      } else if (e.target.classList.contains('edit-link-button')) {
+          const linkId = e.target.dataset.id;
+          const currentTitle = e.target.dataset.title;
+          const currentUrl = e.target.dataset.url;
+
+          const newTitle = prompt('Edit Link Title:', currentTitle);
+          const newUrl = prompt('Edit Link URL:', currentUrl);
+
+          if (newTitle !== null && newUrl !== null) { // User didn't cancel
+              const { error } = await supabase
+                  .from('links')
+                  .update({ title: newTitle, url: newUrl })
+                  .eq('id', linkId);
+
+              if (error) {
+                  alert('Error updating link:' + error.message);
+              } else {
+                  fetchLinks(); // Refresh links list
+              }
+          }
+      }
+    });
+
+    // Handle sign out
+    signoutButton.addEventListener('click', async () => {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        alert('Error signing out:' + error.message);
+      } else {
+        window.location.href = 'auth.html'; // Redirect to login page
+      }
+    });
+
+    // Initial fetch of links when page loads
+    fetchLinks();
+  </script>
+</body>
+</html>
+
